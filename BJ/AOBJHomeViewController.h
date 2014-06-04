@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface AOBJHomeViewController : UIViewController
-@property BOOL wasTapped;
-- (IBAction)buttonTapped:(UIButton *)sender;
+@property(strong) NSMutableDictionary *userInfo;
+
+- (IBAction)logoutButtonTapped:(UIButton *)sender;
 @end

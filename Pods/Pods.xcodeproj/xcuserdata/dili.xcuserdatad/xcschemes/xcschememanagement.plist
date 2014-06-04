@@ -9,12 +9,37 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-BJSystemTests-AFNetworking.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-BJSystemTests-KIF.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-BJSystemTests-SSKeychain.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-BJSystemTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-BJTests-Kiwi.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>Pods-BJTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-SSKeychain.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -27,22 +52,47 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>167D074232CB4733BA41D177</key>
+		<key>00B659FAB07649AAB86F8033</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C5EF9A27BE9C493DB2FFAD2F</key>
+		<key>2AD80CEA0299442A93BA6D62</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F027DD48C8624F709C73059F</key>
+		<key>6D6811ECEE4F4561A23B9A61</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F2FF63A20C114B90929507C8</key>
+		<key>79BE387735FD40F0AEF6CD6D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8FC186AE509146CAB07BDA5B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BDBB0F6F86EA4338979AA048</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CE29812C00964FCF931B287C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DB04FA6E2EAF48428F405FDE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FABDF19C985345A5A702CF22</key>
 		<dict>
 			<key>primary</key>
 			<true/>
