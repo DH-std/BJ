@@ -35,6 +35,8 @@
 		2ABAEA64192F9FDF0010D8C9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ABAEA4C192F9FDF0010D8C9 /* UIKit.framework */; };
 		2ABAEA6C192F9FDF0010D8C9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2ABAEA6A192F9FDF0010D8C9 /* InfoPlist.strings */; };
 		2AE152A5193669F600CC3B9A /* AOBJSigninViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE152A4193669F600CC3B9A /* AOBJSigninViewControllerTests.m */; };
+		2AFE8292193FB92900DEB3EC /* AOBJHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AFE8291193FB92900DEB3EC /* AOBJHelper.m */; };
+		2AFE8295193FBDD300DEB3EC /* AOBJHelperTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AFE8294193FBDD300DEB3EC /* AOBJHelperTest.m */; };
 		50D5163B78244D0E98E67ED0 /* libPods-BJTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CB6937489F14EF795E3C1D6 /* libPods-BJTests.a */; };
 		B921220FCF5A4F908015C2B8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EC722A664CC44C884FA75A0 /* libPods.a */; };
 		D769D81FEC20460C8972F237 /* libPods-BJSystemTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14467C36C5074400BE5C6E1A /* libPods-BJSystemTests.a */; };
@@ -102,6 +104,9 @@
 		2ABAEA69192F9FDF0010D8C9 /* BJTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BJTests-Info.plist"; sourceTree = "<group>"; };
 		2ABAEA6B192F9FDF0010D8C9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2AE152A4193669F600CC3B9A /* AOBJSigninViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AOBJSigninViewControllerTests.m; sourceTree = "<group>"; };
+		2AFE8290193FB92900DEB3EC /* AOBJHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AOBJHelper.h; sourceTree = "<group>"; };
+		2AFE8291193FB92900DEB3EC /* AOBJHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AOBJHelper.m; sourceTree = "<group>"; };
+		2AFE8294193FBDD300DEB3EC /* AOBJHelperTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AOBJHelperTest.m; sourceTree = "<group>"; };
 		3256F2BE6B92468C8AAC5C33 /* Pods-BJSystemTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BJSystemTests.xcconfig"; path = "Pods/Pods-BJSystemTests.xcconfig"; sourceTree = "<group>"; };
 		4CB6937489F14EF795E3C1D6 /* libPods-BJTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BJTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EC722A664CC44C884FA75A0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -228,6 +233,8 @@
 				2A6E2B44193E4C0100C84CAE /* KHGravatar.m */,
 				2A6E2B46193E4F8200C84CAE /* UIImageView+KHGravatar.h */,
 				2A6E2B47193E4F8200C84CAE /* UIImageView+KHGravatar.m */,
+				2AFE8290193FB92900DEB3EC /* AOBJHelper.h */,
+				2AFE8291193FB92900DEB3EC /* AOBJHelper.m */,
 			);
 			path = BJ;
 			sourceTree = "<group>";
@@ -248,6 +255,7 @@
 			children = (
 				2ABAEA68192F9FDF0010D8C9 /* Supporting Files */,
 				2A4011C11935333800923958 /* AOBJHomeViewControllerTests.m */,
+				2AFE8294193FBDD300DEB3EC /* AOBJHelperTest.m */,
 			);
 			path = BJTests;
 			sourceTree = "<group>";
@@ -499,6 +507,7 @@
 			files = (
 				2A8DA72B1936780600C80E1C /* AOBJSigninViewController.m in Sources */,
 				2ABAEA59192F9FDF0010D8C9 /* AOBJAppDelegate.m in Sources */,
+				2AFE8292193FB92900DEB3EC /* AOBJHelper.m in Sources */,
 				2A6E2B45193E4C0100C84CAE /* KHGravatar.m in Sources */,
 				2A4011C019352ED100923958 /* AOBJHomeViewController.m in Sources */,
 				2ABAEA55192F9FDF0010D8C9 /* main.m in Sources */,
@@ -515,6 +524,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2A4011C21935333800923958 /* AOBJHomeViewControllerTests.m in Sources */,
+				2AFE8295193FBDD300DEB3EC /* AOBJHelperTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

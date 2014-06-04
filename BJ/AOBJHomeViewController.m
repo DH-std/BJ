@@ -9,27 +9,22 @@
 #import "AOBJHomeViewController.h"
 #import "UIImageView+KHGravatar.h"
 #import "AOBJGameViewController.h"
+#import "AOBJHelper.h"
 
 #import "NSString+MD5.h"   
 
 @interface AOBJHomeViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *logoutButton;
-@property (weak, nonatomic) IBOutlet UILabel *testLabel;
 @property (weak, nonatomic) IBOutlet UILabel *userName;
 @property (weak, nonatomic) IBOutlet UILabel *userLevel;
 @property (weak, nonatomic) IBOutlet UILabel *userChips;
 @property (weak, nonatomic) IBOutlet UIImageView *userImage;
-@property (weak, nonatomic) IBOutlet UIButton *beginnerButton;
-@property (weak, nonatomic) IBOutlet UIButton *intermediateButton;
-@property (weak, nonatomic) IBOutlet UIButton *highRollButton;
+@property (strong, nonatomic) NSArray *gamedDictionaries;
 @end
 
 @implementation AOBJHomeViewController
 - (IBAction)logoutButtonTapped:(UIButton *)sender {
     NSURL *baseURL = [NSURL URLWithString:@"http://localhost:3000"];
-//    NSDictionary *parameters = @{@"id":[@"/d" self.userInfo.id],
-//                                 @"remember_token":};
-
     
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -49,82 +44,40 @@
                                                         otherButtonTitles:nil];
               alertView.accessibilityLabel = @"connectionError";
               [alertView show];
-          }];    
+          }];
+}
 
-    
-//    NSString *string = @"http://localhost:3000/users/1.json";
-//    NSURL *url = [NSURL URLWithString:string];
-//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-//    
-//    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-//    operation.responseSerializer = [AFJSONResponseSerializer serializer];
-//    
-//    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        
-//        self.userInfo = (NSDictionary *)responseObject;
-////        NSLog(@"JSON Retrieved");
-////        
-////        for(NSString *key in [self.userInfo allKeys]) {
-////            NSLog(@"%@ is %@", key, [self.userInfo objectForKey:key]);
-////        }
-//        
-//        self.testLabel.text = [self.userInfo objectForKey:@"name"];
-//        
-//        // [self.tableView reloadData];
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        
-//        
-//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Retrieving User Information"
-//                                                            message:[error localizedDescription]
-//                                                           delegate:nil
-//                                                  cancelButtonTitle:@"Ok"
-//                                                  otherButtonTitles:nil];
-//        [alertView show];
-//    }];
-//    
-//    [operation start];
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.gamedDictionaries.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TCtmp"];
+    cell.textLabel.text = [self.gamedDictionaries[indexPath.row] objectForKey:@"game_type"];
+    cell.detailTextLabel.text = @"";
+    return cell;
 }
 
 
-- (IBAction)beginnerButtonTapped:(UIButton *)sender {
-  //  [self.userInfo ];
-  
-//  @{@"email":self.emailString.text,
-//      @"password":self.passwordString.text,
-//      @"authenticity_token" : [httpResponse.allHeaderFields objectForKey:@"X-Csrf-Token"]
-//      };
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self performSegueWithIdentifier:@"toGameSegue" sender:self.gamedDictionaries[indexPath.row]];
 }
-
-
-- (IBAction)intermediateButtonTapped:(UIButton *)sender {
-    
-}
-
-
-- (IBAction)highRollButtonTapped:(UIButton *)sender {
-    
-}
-
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"toGameSegue"]) {
         AOBJGameViewController *vc2 = (AOBJGameViewController *)segue.destinationViewController;
-//        NSMutableDictionary *newDict = 
-//        
-//        vc2.gameInfo = self.maybeInfo;
+        NSLog(@"%@", sender);
+        vc2.gameInfo = sender;
     }
 }
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     // User info.
     self.userName.text = [self.userInfo objectForKey:@"name"];
-    NSRange div100 = NSMakeRange(0, self.userChips.text.length);
-    self.userLevel.text = [NSString stringWithFormat:@"Level: %d",
-                           [[self.userChips.text substringWithRange:div100] intValue] + 1];
+    self.userLevel.text = [AOBJHelper levelByChips:[self.userInfo objectForKey:@"chips"]];
     self.userChips.text = [NSString stringWithFormat:@"Chips: %@",
                            [self.userInfo objectForKey:@"chips"]];
     
@@ -135,6 +88,9 @@
                                     defaultImageType:KHGravatarDefaultImageIdenticon
                                         forceDefault:YES
                                               rating:KHGravatarRatingG];
+    
+    // Game tables.
+    self.gamedDictionaries = [self.userInfo objectForKey:@"games"];
 }
 
 @end
