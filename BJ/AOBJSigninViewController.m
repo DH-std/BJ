@@ -17,10 +17,15 @@
 @end
 
 @implementation AOBJSigninViewController
-- (IBAction)loginButton:(UIButton *)sender
-{
-    NSURL *baseURL = [NSURL URLWithString:@"http://localhost:3000"];
 
+- (void) viewDidLoad {
+    [super viewDidLoad];
+    [self.emailString becomeFirstResponder];
+}
+
+-(void) login {
+    NSURL *baseURL = [NSURL URLWithString:@"http://localhost:3000"];
+    
     
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -46,23 +51,6 @@
                   
                   [self performSegueWithIdentifier:@"LoginSuccess" sender:self];
                   
-                  //NSHTTPCookie
-                  
-                  //NSArray * all = [NSHTTPCookie cookiesWithResponseHeaderFields:[response allHeaderFields] forURL:[NSURL URLWithString:@"http://temp"]];
-                  //NSLog(@"How many Cookies: %d", all.count);
-                  
-                  //NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-                  //[cookieStorage setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
-                  //NSArray *cookies = [cookieStorage cookies];
-                  //NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString: @"http://localhost" ]];
-                  
-                  //             NSArray *cookieStorage = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:baseURL];
-                  //             NSDictionary *cookieHeaders = [NSHTTPCookie requestHeaderFieldsWithCookies:cookieStorage];
-                  //             NSMutableURLRequest *request = [myRequestSerializer serializer];
-                  //             for (NSString *key in cookieHeaders) {
-                  //                 [request addValue:cookieHeaders[key] forHTTPHeaderField:key];
-                  //             }
-                  
               } failure:^(NSURLSessionDataTask *task, NSError *error) {
                   UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Retrieving data"
                                                                       message:[error localizedDescription]
@@ -72,50 +60,24 @@
                   alertView.accessibilityLabel = @"connectionError";
                   [alertView show];
               }];
-        
-        
-        ////===
-        //    NSHTTPURLResponse   * response;
-        //    NSError             * error;
-        //    NSMutableURLRequest * request;
-        //    request = [[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://temp/gomh/authenticate.py?setCookie=1"]
-        //                                            cachePolicy:NSURLRequestReloadIgnoringCacheData
-        //                                        timeoutInterval:60] autorelease];
-        //
-        //    [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-        //    NSLog(@"RESPONSE HEADERS: \n%@", [response allHeaderFields]);
-        //
-        //    // If you want to get all of the cookies:
-        //    NSArray * all = [NSHTTPCookie cookiesWithResponseHeaderFields:[response allHeaderFields] forURL:[NSURL URLWithString:@"http://temp"]];
-        //    NSLog(@"How many Cookies: %d", all.count);
-        //    // Store the cookies:
-        //    // NSHTTPCookieStorage is a Singleton.
-        //    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookies:all forURL:[NSURL URLWithString:@"http://temp"] mainDocumentURL:nil];
-        //
-        //    // Now we can print all of the cookies we have:
-        //    for (NSHTTPCookie *cookie in all)
-        //        NSLog(@"Name: %@ : Value: %@, Expires: %@", cookie.name, cookie.value, cookie.expiresDate);
-        //
-        //
-        //    // Now lets go back the other way.  We want the server to know we have some cookies available:
-        //    // this availableCookies array is going to be the same as the 'all' array above.  We could
-        //    // have just used the 'all' array, but this shows you how to get the cookies back from the singleton.
-        //    NSArray * availableCookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:@"http://temp"]];
-        //    NSDictionary * headers = [NSHTTPCookie requestHeaderFieldsWithCookies:availableCookies];
-        //    
-        //    // we are just recycling the original request
-        //    [request setAllHTTPHeaderFields:headers];
-        //    
-        //    request.URL = [NSURL URLWithString:@"http://temp/gomh/authenticate.py"];
-        //    error       = nil;
-        //    response    = nil;
-        //    
-        //    NSData * data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-        //    NSLog(@"The server saw:\n%@", [[[NSString alloc] initWithData:data encoding: NSASCIIStringEncoding] autorelease]);
-        ////===
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        
-    }];
+    } failure:nil];
+    
+}
+
+- (IBAction)loginButton:(UIButton *)sender
+{
+    [self login];
+}
+
+
+- (bool) textFieldShouldReturn:(UITextField*) textField {
+    if (textField == self.emailString) {
+        [self.passwordString becomeFirstResponder];
+    } else if (textField == self.passwordString) {
+        [self.passwordString resignFirstResponder];
+        [self login];
+    }
+    return YES;
 }
 
 
@@ -135,12 +97,6 @@
         // Custom initialization
     }
     return self;
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
 }
 
 @end

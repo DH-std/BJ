@@ -12,4 +12,6 @@
 
 + (NSString*) levelByChips:(NSString*) chips;
 
++ (void) setImageFor:(UIImageView *) imageView useEmail:(NSString *) email;
+
 @end

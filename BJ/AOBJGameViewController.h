@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface AOBJGameViewController : UIViewController
-@property(strong) NSDictionary *gameInfo;
-
+@property (strong, nonatomic) NSDictionary *gameInfo;
 
 @end

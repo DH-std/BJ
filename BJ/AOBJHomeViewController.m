@@ -23,6 +23,39 @@
 @end
 
 @implementation AOBJHomeViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    // User info.
+    self.userName.text = [self.userInfo objectForKey:@"name"];
+    self.userLevel.text = [NSString stringWithFormat:@"Level: %@",
+                           [AOBJHelper levelByChips:[self.userInfo objectForKey:@"chips"]]];
+    self.userChips.text = [NSString stringWithFormat:@"Chips: %@",
+                           [self.userInfo objectForKey:@"chips"]];
+    
+    // User gravatar.
+    [AOBJHelper setImageFor:self.userImage useEmail:[self.userInfo objectForKey:@"email"]];
+
+    // Game tables.
+    self.gamedDictionaries = [self.userInfo objectForKey:@"games"];
+}
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"toGameSegue"]) {
+        AOBJGameViewController *vc2 = (AOBJGameViewController *)segue.destinationViewController;
+        NSLog(@"sender is %@", sender);
+        vc2.gameInfo = @{@"game":sender,
+                         @"user_id":[self.userInfo objectForKey:@"id"],
+                         @"name":[self.userInfo objectForKey:@"name"],
+                         @"email":[self.userInfo objectForKey:@"email"],
+                         @"chips":[self.userInfo objectForKey:@"chips"]};
+        }
+}
+
+
 - (IBAction)logoutButtonTapped:(UIButton *)sender {
     NSURL *baseURL = [NSURL URLWithString:@"http://localhost:3000"];
     
@@ -47,9 +80,11 @@
           }];
 }
 
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.gamedDictionaries.count;
 }
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TCtmp"];
@@ -62,36 +97,5 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self performSegueWithIdentifier:@"toGameSegue" sender:self.gamedDictionaries[indexPath.row]];
 }
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.identifier isEqualToString:@"toGameSegue"]) {
-        AOBJGameViewController *vc2 = (AOBJGameViewController *)segue.destinationViewController;
-        NSLog(@"%@", sender);
-        vc2.gameInfo = sender;
-    }
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    // User info.
-    self.userName.text = [self.userInfo objectForKey:@"name"];
-    self.userLevel.text = [AOBJHelper levelByChips:[self.userInfo objectForKey:@"chips"]];
-    self.userChips.text = [NSString stringWithFormat:@"Chips: %@",
-                           [self.userInfo objectForKey:@"chips"]];
-    
-    // User gravatar.
-    NSString *userEmail = [self.userInfo objectForKey:@"email"];
-    [self.userImage setImageWithGravatarEmailAddress:userEmail
-                                    placeholderImage:nil
-                                    defaultImageType:KHGravatarDefaultImageIdenticon
-                                        forceDefault:YES
-                                              rating:KHGravatarRatingG];
-    
-    // Game tables.
-    self.gamedDictionaries = [self.userInfo objectForKey:@"games"];
-}
-
 @end
 
