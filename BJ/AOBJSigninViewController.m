@@ -49,6 +49,13 @@
                       NSLog(@"%@ is =%@=", key, [self.maybeInfo objectForKey:key]);
                   }
                   
+                  NSData *cookiesData = [NSKeyedArchiver archivedDataWithRootObject: [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]];
+                  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                  [defaults setObject: cookiesData forKey: @"sessionCookies"];
+                  [defaults synchronize];
+                  
+                  // NSLog([cookiesData]);
+                  
                   [self performSegueWithIdentifier:@"LoginSuccess" sender:self];
                   
               } failure:^(NSURLSessionDataTask *task, NSError *error) {
@@ -85,7 +92,7 @@
 {
     if ([segue.identifier isEqualToString:@"LoginSuccess"]) {
         AOBJHomeViewController *vc2 = (AOBJHomeViewController *)segue.destinationViewController;
-        vc2.userInfo = self.maybeInfo;
+        vc2.userInfo = [self.maybeInfo mutableCopy];
     }
 }
 

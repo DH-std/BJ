@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AOBJHTTPClient.h"
 
-@interface AOBJGameViewController : UIViewController
+@interface AOBJGameViewController : UIViewController <AOBJHTTPClientDelegate>
 @property (strong, nonatomic) NSDictionary *gameInfo;
 
 @end

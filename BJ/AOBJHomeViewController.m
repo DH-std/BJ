@@ -10,6 +10,7 @@
 #import "UIImageView+KHGravatar.h"
 #import "AOBJGameViewController.h"
 #import "AOBJHelper.h"
+#import "AOBJGameCellView.h"
 
 #import "NSString+MD5.h"   
 
@@ -18,8 +19,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *userName;
 @property (weak, nonatomic) IBOutlet UILabel *userLevel;
 @property (weak, nonatomic) IBOutlet UILabel *userChips;
+@property (weak, nonatomic) IBOutlet UITableView *gameTableView;
 @property (weak, nonatomic) IBOutlet UIImageView *userImage;
-@property (strong, nonatomic) NSArray *gamedDictionaries;
+@property (strong, nonatomic) NSDictionary *gameDictionaries;
+@property (strong, nonatomic) NSArray *gameTypes;
 @end
 
 @implementation AOBJHomeViewController
@@ -38,7 +41,11 @@
     [AOBJHelper setImageFor:self.userImage useEmail:[self.userInfo objectForKey:@"email"]];
 
     // Game tables.
-    self.gamedDictionaries = [self.userInfo objectForKey:@"games"];
+    self.gameDictionaries = [self.userInfo objectForKey:@"games"];
+    
+    self.gameTypes = @[@"Beginner",@"Intermediate",@"High Roller"];
+    
+    [self.gameTableView registerNib:[UINib nibWithNibName:@"GameCellView" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"GameCellView"];
 }
 
 
@@ -47,11 +54,7 @@
     if ([segue.identifier isEqualToString:@"toGameSegue"]) {
         AOBJGameViewController *vc2 = (AOBJGameViewController *)segue.destinationViewController;
         NSLog(@"sender is %@", sender);
-        vc2.gameInfo = @{@"game":sender,
-                         @"user_id":[self.userInfo objectForKey:@"id"],
-                         @"name":[self.userInfo objectForKey:@"name"],
-                         @"email":[self.userInfo objectForKey:@"email"],
-                         @"chips":[self.userInfo objectForKey:@"chips"]};
+        vc2.gameInfo = sender;
         }
 }
 
@@ -82,20 +85,75 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.gamedDictionaries.count;
+    return self.gameDictionaries.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TCtmp"];
-    cell.textLabel.text = [self.gamedDictionaries[indexPath.row] objectForKey:@"game_type"];
-    cell.detailTextLabel.text = @"";
+    AOBJGameCellView *cell = [tableView dequeueReusableCellWithIdentifier:@"GameCellView"];
+    NSDictionary *game = [self gameForCellAtIndexPath:indexPath];
+    cell.gameTitle.text = [game objectForKey:@"game_type"];
+    cell.gameBetAmounts.text = [game objectForKey:@"bet"];
+    cell.buttonLabel.text = [game valueForKey:@"button"];
     return cell;
 }
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self performSegueWithIdentifier:@"toGameSegue" sender:self.gamedDictionaries[indexPath.row]];
+    NSDictionary *game = [self gameForCellAtIndexPath:indexPath];
+    
+    NSNumber *chips = [self.userInfo objectForKey:@"chips"];
+    NSNumber *min = [game objectForKey:@"min_bet"];
+    
+    NSLog(@"game dictionary%@", game);
+    NSLog(@"chips %@, needs %@", chips, min);
+    
+    if ( [chips compare:min] == -1) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Not Enough Chips"
+            message:@"The chips you currenly own is not enough to join this game table. Please choose a different table to join."
+            delegate:nil
+            cancelButtonTitle:@"Ok"
+            otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+    
+    AOBJHTTPClient *client = [AOBJHTTPClient sharedAOBJHTTPClient];
+    [client updateGame:[game valueForKey:@"id"]
+             forPlayer:[game valueForKey:@"user_id"]
+            withAction:[game valueForKey:@"button"]
+     thenDo:^(NSURLSessionDataTask *task, id responseObject) {
+         [self performSegueWithIdentifier:@"toGameSegue" sender:responseObject];
+     }];
 }
+
+
+- (NSDictionary *)gameForCellAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *gameType = self.gameTypes[indexPath.row];
+    NSMutableDictionary *game = [[self.gameDictionaries objectForKey:[NSString stringWithFormat:@"%@", gameType]] mutableCopy];
+    
+    if ([[game objectForKey:@"bet"] isEqual: [NSNull null]]) {
+        if ([[game objectForKey:@"max_bet"] isEqual: [NSNull null]]){
+            [game setObject:@"Required bet: 100 or more" forKey:@"bet"];
+        } else {
+            [game setObject:[NSString stringWithFormat:@"Required bet: %@ - %@",
+                                    [game objectForKey:@"min_bet"],
+                                    [game objectForKey:@"max_bet"]]
+                     forKey:@"bet"];
+        }
+        [game setObject:@"New Game" forKey:@"button"];
+    } else {
+        [game setObject:[NSString stringWithFormat:@"Betted: %@", [game objectForKey:@"bet"]] forKey:@"bet"];
+        [game setObject:@"Continue" forKey:@"button"];
+    }
+
+    return [game copy];
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 120.0;
+}
+
 @end
 

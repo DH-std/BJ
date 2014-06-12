@@ -14,4 +14,6 @@
 
 + (void) setImageFor:(UIImageView *) imageView useEmail:(NSString *) email;
 
++ (void) showMesssge:(NSString *)msg;
+
 @end

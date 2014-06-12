@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2A15D2B3193E738C00DFAF12 /* AOBJGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A15D2B2193E738C00DFAF12 /* AOBJGameViewController.m */; };
+		2A2C7EA71947C2D700C8B586 /* AOBJHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C7EA61947C2D700C8B586 /* AOBJHTTPClient.m */; };
 		2A4011BA1934D7AC00923958 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A4011B91934D7AC00923958 /* Main.storyboard */; };
 		2A4011C019352ED100923958 /* AOBJHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A4011BF19352ED100923958 /* AOBJHomeViewController.m */; };
 		2A4011C21935333800923958 /* AOBJHomeViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A4011C11935333800923958 /* AOBJHomeViewControllerTests.m */; };
@@ -34,6 +35,8 @@
 		2ABAEA63192F9FDF0010D8C9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ABAEA48192F9FDF0010D8C9 /* Foundation.framework */; };
 		2ABAEA64192F9FDF0010D8C9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ABAEA4C192F9FDF0010D8C9 /* UIKit.framework */; };
 		2ABAEA6C192F9FDF0010D8C9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2ABAEA6A192F9FDF0010D8C9 /* InfoPlist.strings */; };
+		2ACD977019465169009D8CCE /* GameCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2ACD976F19465169009D8CCE /* GameCellView.xib */; };
+		2ACD97731946520B009D8CCE /* AOBJGameCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ACD97721946520B009D8CCE /* AOBJGameCellView.m */; };
 		2AE152A5193669F600CC3B9A /* AOBJSigninViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE152A4193669F600CC3B9A /* AOBJSigninViewControllerTests.m */; };
 		2AFE8292193FB92900DEB3EC /* AOBJHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AFE8291193FB92900DEB3EC /* AOBJHelper.m */; };
 		2AFE8295193FBDD300DEB3EC /* AOBJHelperTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AFE8294193FBDD300DEB3EC /* AOBJHelperTest.m */; };
@@ -65,6 +68,8 @@
 		1B9BA3928CBB4787ACF52F03 /* Pods-BJTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BJTests.xcconfig"; path = "Pods/Pods-BJTests.xcconfig"; sourceTree = "<group>"; };
 		2A15D2B1193E738C00DFAF12 /* AOBJGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AOBJGameViewController.h; sourceTree = "<group>"; };
 		2A15D2B2193E738C00DFAF12 /* AOBJGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AOBJGameViewController.m; sourceTree = "<group>"; };
+		2A2C7EA51947C2D700C8B586 /* AOBJHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AOBJHTTPClient.h; sourceTree = "<group>"; };
+		2A2C7EA61947C2D700C8B586 /* AOBJHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AOBJHTTPClient.m; sourceTree = "<group>"; };
 		2A4011B91934D7AC00923958 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		2A4011BE19352ED100923958 /* AOBJHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AOBJHomeViewController.h; sourceTree = "<group>"; };
 		2A4011BF19352ED100923958 /* AOBJHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AOBJHomeViewController.m; sourceTree = "<group>"; };
@@ -103,6 +108,9 @@
 		2ABAEA61192F9FDF0010D8C9 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		2ABAEA69192F9FDF0010D8C9 /* BJTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BJTests-Info.plist"; sourceTree = "<group>"; };
 		2ABAEA6B192F9FDF0010D8C9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2ACD976F19465169009D8CCE /* GameCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameCellView.xib; sourceTree = "<group>"; };
+		2ACD97711946520B009D8CCE /* AOBJGameCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AOBJGameCellView.h; sourceTree = "<group>"; };
+		2ACD97721946520B009D8CCE /* AOBJGameCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AOBJGameCellView.m; sourceTree = "<group>"; };
 		2AE152A4193669F600CC3B9A /* AOBJSigninViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AOBJSigninViewControllerTests.m; sourceTree = "<group>"; };
 		2AFE8290193FB92900DEB3EC /* AOBJHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AOBJHelper.h; sourceTree = "<group>"; };
 		2AFE8291193FB92900DEB3EC /* AOBJHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AOBJHelper.m; sourceTree = "<group>"; };
@@ -218,6 +226,8 @@
 				2ABAEA4F192F9FDF0010D8C9 /* Supporting Files */,
 				2A15D2B1193E738C00DFAF12 /* AOBJGameViewController.h */,
 				2A15D2B2193E738C00DFAF12 /* AOBJGameViewController.m */,
+				2A2C7EA51947C2D700C8B586 /* AOBJHTTPClient.h */,
+				2A2C7EA61947C2D700C8B586 /* AOBJHTTPClient.m */,
 				2A4011BE19352ED100923958 /* AOBJHomeViewController.h */,
 				2A4011BF19352ED100923958 /* AOBJHomeViewController.m */,
 				2A8DA7291936780600C80E1C /* AOBJSigninViewController.h */,
@@ -235,6 +245,9 @@
 				2A6E2B47193E4F8200C84CAE /* UIImageView+KHGravatar.m */,
 				2AFE8290193FB92900DEB3EC /* AOBJHelper.h */,
 				2AFE8291193FB92900DEB3EC /* AOBJHelper.m */,
+				2ACD976F19465169009D8CCE /* GameCellView.xib */,
+				2ACD97711946520B009D8CCE /* AOBJGameCellView.h */,
+				2ACD97721946520B009D8CCE /* AOBJGameCellView.m */,
 			);
 			path = BJ;
 			sourceTree = "<group>";
@@ -383,6 +396,7 @@
 			files = (
 				2A4011BA1934D7AC00923958 /* Main.storyboard in Resources */,
 				2ABAEA53192F9FDF0010D8C9 /* InfoPlist.strings in Resources */,
+				2ACD977019465169009D8CCE /* GameCellView.xib in Resources */,
 				2ABAEA5B192F9FDF0010D8C9 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -507,6 +521,8 @@
 			files = (
 				2A8DA72B1936780600C80E1C /* AOBJSigninViewController.m in Sources */,
 				2ABAEA59192F9FDF0010D8C9 /* AOBJAppDelegate.m in Sources */,
+				2A2C7EA71947C2D700C8B586 /* AOBJHTTPClient.m in Sources */,
+				2ACD97731946520B009D8CCE /* AOBJGameCellView.m in Sources */,
 				2AFE8292193FB92900DEB3EC /* AOBJHelper.m in Sources */,
 				2A6E2B45193E4C0100C84CAE /* KHGravatar.m in Sources */,
 				2A4011C019352ED100923958 /* AOBJHomeViewController.m in Sources */,
